@@ -24,7 +24,7 @@ body {
 
 .container {
   background: white;
-  max-width: 1100px;
+  max-width: 1000px;
   width: 100%;
   border-radius: 45px;
   padding: 25px;
@@ -59,7 +59,7 @@ body {
 
 h1 {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin: 10px 0 5px;
   background: linear-gradient(135deg, #0b1f3a, #0f766e);
   -webkit-background-clip: text;
@@ -69,45 +69,42 @@ h1 {
 
 .designer {
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #0f766e;
   margin-bottom: 15px;
   font-weight: 500;
 }
 
-/* صفحه اصلی بازی */
 .game-area {
   display: flex;
   flex-direction: row;
-  gap: 25px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-/* تخته بازی 6x6 (36 خانه) */
 .board {
   background: #f1f5f9;
-  border-radius: 25px;
-  padding: 15px;
+  border-radius: 20px;
+  padding: 12px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
-  max-width: 500px;
+  max-width: 400px;
   flex: 1;
 }
 
 .cell {
   aspect-ratio: 1;
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #0b1f3a;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .cell.player {
@@ -126,22 +123,21 @@ h1 {
   color: white;
 }
 
-/* پنل سوال */
 .question-panel {
   background: #f8fafc;
-  border-radius: 30px;
-  padding: 20px;
+  border-radius: 25px;
+  padding: 18px;
   flex: 1;
-  min-width: 280px;
+  min-width: 260px;
 }
 
 .question-text {
   background: #f1f5f9;
-  padding: 20px;
-  border-radius: 25px;
-  font-size: 1rem;
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 0.95rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
   border-right: 4px solid #0f766e;
 }
@@ -149,21 +145,20 @@ h1 {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .opt-btn {
-  padding: 14px;
+  padding: 12px;
   background: #0ea5e9;
   color: white;
   border: none;
-  border-radius: 35px;
-  font-size: 0.95rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
-  text-align: center;
 }
 
 .opt-btn:hover {
@@ -181,55 +176,51 @@ h1 {
 }
 
 .feedback {
-  padding: 12px;
-  border-radius: 20px;
-  margin: 15px 0;
-  font-size: 0.85rem;
+  padding: 10px;
+  border-radius: 18px;
+  margin: 12px 0;
+  font-size: 0.8rem;
   text-align: center;
 }
 
 .dice-area {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 .dice-btn {
   background: #fbbf24;
   color: #0b1f3a;
-  padding: 12px 25px;
-  font-size: 1.2rem;
+  padding: 10px 20px;
+  font-size: 1rem;
   font-weight: 800;
   border: none;
-  border-radius: 50px;
+  border-radius: 40px;
   cursor: pointer;
-  transition: 0.2s;
-}
-
-.dice-btn:active {
-  transform: scale(0.95);
 }
 
 .dice-result {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .score-board {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
   background: #e2e8f0;
-  padding: 10px;
-  border-radius: 30px;
+  padding: 8px;
+  border-radius: 25px;
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .restart-btn {
   background: #0f766e;
-  padding: 10px 20px;
-  margin-top: 15px;
+  padding: 8px 18px;
+  margin-top: 12px;
   border: none;
-  border-radius: 30px;
+  border-radius: 25px;
   color: white;
   font-weight: 700;
   cursor: pointer;
@@ -241,23 +232,13 @@ h1 {
   75% { transform: translateX(5px); }
 }
 
-.hidden {
-  display: none;
-}
-
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .board {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 100%;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
   }
   .cell {
     font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 550px) {
-  .board {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>
@@ -270,15 +251,11 @@ h1 {
     <div class="school-name">🏫 مدرسه فرزانگان ۱ شهریار</div>
     <h1>🎲 مار و پله بی‌مهرگان 🐍</h1>
     <div class="designer">✨ طراح: سرکار خانم معصومه مرتجایی</div>
-    <p style="font-size:0.75rem; text-align:center; margin-top:5px;">تاس بینداز، به سوال درست جواب بده تا جلو بروی!</p>
   </div>
 
   <div class="game-area">
-    <!-- تخته بازی -->
     <div class="board" id="board"></div>
-
-    <!-- پنل سوال -->
-    <div class="question-panel" id="questionPanel">
+    <div class="question-panel">
       <div class="question-text" id="questionText"></div>
       <div class="options" id="optionsDiv"></div>
       <div class="feedback" id="feedback"></div>
@@ -286,105 +263,44 @@ h1 {
         <button class="dice-btn" id="diceBtn">🎲 تاس بنداز</button>
         <div class="dice-result" id="diceResult"></div>
       </div>
-      <div class="score-board">
-        🎯 موقعیت شما: خانه <span id="playerPos">1</span> از 36
-      </div>
+      <div class="score-board">📍 موقعیت شما: خانه <span id="playerPos">1</span> از 25</div>
       <button class="restart-btn" id="restartBtn">🔄 بازی جدید</button>
     </div>
   </div>
 </div>
 
 <script>
-// ========== سوالات (علوم نهم - بی‌مهرگان و فصل 15) ==========
+// ========== 24 سوال غیرتکراری ==========
 const questions = [
-  {
-    text: "کدام یک از موارد زیر جزو کرم‌های حلقوی است؟",
-    options: ["کرم خاکی", "کرم کدو", "اسکاریس"],
-    correct: 0,
-    explanation: "✅ کرم خاکی از شاخه آنلیدا (کرم‌های حلقوی) است. کرم کدو از پهن‌کرم‌ها و اسکاریس از لوله‌ای‌هاست."
-  },
-  {
-    text: "کرم اسکاریس از کدام گروه کرم‌ها است؟",
-    options: ["پهن", "لوله‌ای", "حلقوی"],
-    correct: 1,
-    explanation: "✅ اسکاریس از شاخه نماتودا (کرم‌های لوله‌ای) است که در روده انسان زندگی می‌کند."
-  },
-  {
-    text: "کدام یک از کرم‌های زیر زندگی انگلی دارد؟",
-    options: ["کرم خاکی", "زالو", "کرم ابریشم"],
-    correct: 1,
-    explanation: "✅ زالو برخی گونه‌هایش خون‌خوار و انگل خارجی موقت است. کرم خاکی و کرم ابریشم آزادزی هستند."
-  },
-  {
-    text: "کدام یک از بندپایان دو جفت پا در هر بند دارد؟",
-    options: ["حشرات", "عنکبوتیان", "هزارپایان"],
-    correct: 2,
-    explanation: "✅ هزارپایان در هر بند دو جفت پا دارند. حشرات سه جفت پا و عنکبوتیان چهار جفت پا دارند."
-  },
-  {
-    text: "کدام یک از جانوران زیر جزو نرم‌تنان است؟",
-    options: ["خرچنگ", "حلزون", "عنکبوت"],
-    correct: 1,
-    explanation: "✅ حلزون از شاخه نرم‌تنان (Mollusca) است. خرچنگ بندپا و عنکبوت عنکبوتیان است."
-  },
-  {
-    text: "کدام یک از حشرات دگردیسی کامل دارد؟",
-    options: ["ملخ", "سوسک", "پروانه"],
-    correct: 2,
-    explanation: "✅ پروانه دارای دگردیسی کامل (تخم-لارو-شفیره-حشره کامل) است. ملخ و سوسک دگردیسی ناقص دارند."
-  },
-  {
-    text: "کدام یک از موارد زیر از ویژگی‌های بندپایان نیست؟",
-    options: ["اسکلت خارجی", "بدن قطعه‌قطعه", "اسکلت داخلی"],
-    correct: 2,
-    explanation: "✅ بندپایان اسکلت خارجی دارند، نه اسکلت داخلی."
-  },
-  {
-    text: "کدام گروه از بی‌مهرگان دارای کیسه گوارش هستند؟",
-    options: ["کرم‌های پهن", "کرم‌های حلقوی", "نرم‌تنان"],
-    correct: 0,
-    explanation: "✅ کرم‌های پهن (مانند کرم کدو) دارای کیسه گوارش هستند (یک دهانه برای ورود و خروج غذا)."
-  },
-  {
-    text: "کدام جانور از طریق آبشش تنفس می‌کند؟",
-    options: ["حلزون خشکی", "خرچنگ", "عنکبوت"],
-    correct: 1,
-    explanation: "✅ خرچنگ سخت‌پوستی است که با آبشش تنفس می‌کند. حلزون خشکی با کیسه ریه و عنکبوت با شش کتابی تنفس می‌کند."
-  },
-  {
-    text: "کدام یک از جانوران زیر تقارن شعاعی دارد؟",
-    options: ["کرم خاکی", "ماهی", "ستاره دریایی"],
-    correct: 2,
-    explanation: "✅ ستاره دریایی (خارپوستان) تقارن شعاعی دارد. کرم خاکی و ماهی تقارن دوطرفه دارند."
-  },
-  {
-    text: "کدام یک از موارد زیر جزو زنبورهای اجتماعی است؟",
-    options: ["زنبور عسل", "زنبور گال‌زا", "زنبور تنها"],
-    correct: 0,
-    explanation: "✅ زنبور عسل یک حشره اجتماعی است و در کلنی زندگی می‌کند."
-  },
-  {
-    text: "کرم کدو از کدام گروه کرم‌ها است؟",
-    options: ["پهن", "لوله‌ای", "حلقوی"],
-    correct: 0,
-    explanation: "✅ کرم کدو (Tenía) از شاخه کرم‌های پهن (Platyhelminthes) است."
-  }
+  { text: "کدام یک از موارد زیر جزو کرم‌های حلقوی است؟", options: ["کرم خاکی", "کرم کدو", "اسکاریس"], correct: 0, explanation: "✅ کرم خاکی از شاخه آنلیدا (کرم‌های حلقوی) است." },
+  { text: "کرم اسکاریس از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 1, explanation: "✅ اسکاریس از شاخه نماتودا (کرم‌های لوله‌ای) است." },
+  { text: "کدام یک از کرم‌های زیر زندگی آزاد دارد؟", options: ["کرم کدو", "پلاناریا", "کپلک"], correct: 1, explanation: "✅ پلاناریا از کرم‌های پهن آزادزی است." },
+  { text: "میزبان حد واسط کدامیک از کرم‌های زیر حلزون است؟", options: ["کپلک", "آسکاریس", "کرم قلابدار"], correct: 0, explanation: "✅ کپلک (زالو) میزبان واسط ندارد." },
+  { text: "کدامیک جزو سخت پوستان است؟", options: ["کنه", "خرخاکی", "عقرب"], correct: 1, explanation: "✅ خرخاکی از زیرشاخه سخت پوستان است." },
+  { text: "کدامیک ۸ پا دارد؟", options: ["خرخاکی", "ملخ", "عقرب"], correct: 2, explanation: "✅ عقرب از عنکبوتیان و ۸ پا دارد." },
+  { text: "کدامیک دگردیسی ناقص دارد؟", options: ["پروانه", "ملخ", "پشه"], correct: 1, explanation: "✅ ملخ دارای دگردیسی ناقص است." },
+  { text: "کدامیک دستگاه گردش آب دارد؟", options: ["مرجان", "اسفنج", "ستاره دریایی"], correct: 2, explanation: "✅ ستاره دریایی (خارپوستان) دارای دستگاه گردش آب است." },
+  { text: "کدامیک در روده سگ بالغ می‌شود؟", options: ["کرم کدو", "کپلک", "مولد کیست هیداتیک"], correct: 0, explanation: "✅ کرم کدو بالغ در روده سگ زندگی می‌کند." },
+  { text: "کدامیک در روده بزرگ زندگی می‌کند؟", options: ["آسکاریس", "کرم قلابدار", "کرمک"], correct: 2, explanation: "✅ کرمک در روده بزرگ و ناحیه مقعد زندگی می‌کند." },
+  { text: "کدام یک از بندپایان دو جفت پا در هر بند دارد؟", options: ["حشرات", "عنکبوتیان", "هزارپایان"], correct: 2, explanation: "✅ هزارپایان در هر بند دو جفت پا دارند." },
+  { text: "کدام یک از جانوران زیر جزو نرم‌تنان است؟", options: ["خرچنگ", "حلزون", "عنکبوت"], correct: 1, explanation: "✅ حلزون از شاخه نرم‌تنان است." },
+  { text: "کدام یک از موارد زیر از ویژگی‌های بندپایان نیست؟", options: ["اسکلت خارجی", "بدن قطعه‌قطعه", "اسکلت داخلی"], correct: 2, explanation: "✅ بندپایان اسکلت خارجی دارند." },
+  { text: "کدام گروه از بی‌مهرگان دارای کیسه گوارش هستند؟", options: ["کرم‌های پهن", "کرم‌های حلقوی", "نرم‌تنان"], correct: 0, explanation: "✅ کرم‌های پهن دارای کیسه گوارش هستند." },
+  { text: "کدام جانور از طریق آبشش تنفس می‌کند؟", options: ["حلزون خشکی", "خرچنگ", "عنکبوت"], correct: 1, explanation: "✅ خرچنگ با آبشش تنفس می‌کند." },
+  { text: "کدام یک از جانوران زیر تقارن شعاعی دارد؟", options: ["کرم خاکی", "ماهی", "ستاره دریایی"], correct: 2, explanation: "✅ ستاره دریایی تقارن شعاعی دارد." },
+  { text: "کدام یک از موارد زیر جزو زنبورهای اجتماعی است؟", options: ["زنبور عسل", "زنبور گال‌زا", "زنبور تنها"], correct: 0, explanation: "✅ زنبور عسل یک حشره اجتماعی است." },
+  { text: "کرم کدو از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 0, explanation: "✅ کرم کدو از شاخه کرم‌های پهن است." },
+  { text: "کدامیک زندگی انگلی دارد؟", options: ["کرم خاکی", "زالو", "پلاناریا"], correct: 1, explanation: "✅ زالو برخی گونه‌هایش انگل خارجی موقت است." },
+  { text: "کدامیک از حشرات دگردیسی کامل دارد؟", options: ["ملخ", "سوسک", "پروانه"], correct: 2, explanation: "✅ پروانه دارای دگردیسی کامل است." },
+  { text: "کدامیک از کرم‌های زیر در روده کوچک زندگی می‌کند؟", options: ["کرمک", "آسکاریس", "کرم قلابدار"], correct: 1, explanation: "✅ آسکاریس در روده کوچک زندگی می‌کند." },
+  { text: "کدامیک از بندپایان سه جفت پا دارد؟", options: ["عنکبوت", "خرچنگ", "ملخ"], correct: 2, explanation: "✅ ملخ از حشرات و ۶ پا (سه جفت) دارد." },
+  { text: "کدامیک دارای اسکلت آهکی است؟", options: ["خرچنگ", "عنکبوت", "کرم خاکی"], correct: 0, explanation: "✅ خرچنگ از سخت پوستان و دارای اسکلت آهکی است." },
+  { text: "کدامیک از بی‌مهرگان در آب شیرین زندگی می‌کند؟", options: ["اسفنج دریایی", "پلاناریا", "ستاره دریایی"], correct: 1, explanation: "✅ پلاناریا از کرم‌های پهن آب شیرین است." }
 ];
 
-// موقعیت‌های ویژه (مارها و پله‌ها)
-const snakes = {
-  34: 18,
-  28: 12,
-  22: 8,
-  15: 5
-};
-
-const ladders = {
-  3: 19,
-  6: 27,
-  9: 31,
-  17: 36
-};
+// مارها و پله‌ها (مسیر 25 خانه‌ای)
+const snakes = { 22: 10, 18: 6, 14: 4 };
+const ladders = { 3: 13, 5: 19, 8: 17, 12: 23 };
 
 let playerPos = 1;
 let diceValue = 0;
@@ -400,23 +316,13 @@ function getRandomQuestion() {
 function renderBoard() {
   const board = document.getElementById("board");
   board.innerHTML = "";
-  for (let i = 36; i >= 1; i--) {
+  for (let i = 25; i >= 1; i--) {
     const cell = document.createElement("div");
     cell.className = "cell";
     cell.innerText = i;
-    
-    if (playerPos === i) {
-      cell.classList.add("player");
-    }
-    if (snakes[i]) {
-      cell.classList.add("snake");
-      cell.innerText = i + "🐍";
-    }
-    if (ladders[i]) {
-      cell.classList.add("ladder");
-      cell.innerText = i + "🪜";
-    }
-    
+    if (playerPos === i) cell.classList.add("player");
+    if (snakes[i]) { cell.classList.add("snake"); cell.innerText = i + "🐍"; }
+    if (ladders[i]) { cell.classList.add("ladder"); cell.innerText = i + "🪜"; }
     board.appendChild(cell);
   }
 }
@@ -425,11 +331,9 @@ function showQuestion() {
   const q = getRandomQuestion();
   currentQuestion = q;
   answered = false;
-  
   document.getElementById("questionText").innerHTML = q.text;
   const optionsDiv = document.getElementById("optionsDiv");
   optionsDiv.innerHTML = "";
-  
   q.options.forEach((opt, idx) => {
     const btn = document.createElement("button");
     btn.className = "opt-btn";
@@ -437,9 +341,7 @@ function showQuestion() {
     btn.onclick = () => checkAnswer(idx, btn);
     optionsDiv.appendChild(btn);
   });
-  
   document.getElementById("feedback").innerHTML = "";
-  document.getElementById("feedback").style.background = "";
   document.getElementById("diceBtn").disabled = true;
   waitingForQuestion = true;
 }
@@ -447,7 +349,6 @@ function showQuestion() {
 function checkAnswer(selectedIdx, btnElement) {
   if (!waitingForQuestion || answered) return;
   answered = true;
-  
   const isCorrect = (selectedIdx === currentQuestion.correct);
   const feedbackDiv = document.getElementById("feedback");
   
@@ -456,24 +357,14 @@ function checkAnswer(selectedIdx, btnElement) {
     feedbackDiv.innerHTML = "✅ " + currentQuestion.explanation;
     feedbackDiv.style.background = "#dcfce7";
     feedbackDiv.style.color = "#166534";
-    
     let newPos = playerPos + diceValue;
-    if (newPos > 36) newPos = 36;
-    
-    if (ladders[newPos]) {
-      newPos = ladders[newPos];
-      feedbackDiv.innerHTML += "<br>🎉 پله! به خانه " + newPos + " رفتی!";
-    }
-    if (snakes[newPos]) {
-      newPos = snakes[newPos];
-      feedbackDiv.innerHTML += "<br>🐍 مار! به خانه " + newPos + " رفتی!";
-    }
-    
+    if (newPos > 25) newPos = 25;
+    if (ladders[newPos]) { newPos = ladders[newPos]; feedbackDiv.innerHTML += "<br>🎉 پله! به خانه " + newPos + " رفتی!"; }
+    if (snakes[newPos]) { newPos = snakes[newPos]; feedbackDiv.innerHTML += "<br>🐍 مار! به خانه " + newPos + " رفتی!"; }
     playerPos = newPos;
     document.getElementById("playerPos").innerText = playerPos;
     renderBoard();
-    
-    if (playerPos === 36) {
+    if (playerPos === 25) {
       feedbackDiv.innerHTML = "🎉🎊 تبریک! به انتهای بازی رسیدی! 🎊🎉";
       document.getElementById("diceBtn").disabled = true;
       waitingForQuestion = false;
@@ -486,7 +377,6 @@ function checkAnswer(selectedIdx, btnElement) {
     feedbackDiv.style.background = "#fee2e2";
     feedbackDiv.style.color = "#991b1b";
   }
-  
   setTimeout(() => {
     waitingForQuestion = false;
     document.getElementById("diceBtn").disabled = false;
@@ -497,15 +387,8 @@ function checkAnswer(selectedIdx, btnElement) {
 }
 
 function rollDice() {
-  if (waitingForQuestion) {
-    document.getElementById("feedback").innerHTML = "⚠️ اول به سوال جواب بده!";
-    return;
-  }
-  if (playerPos === 36) {
-    document.getElementById("feedback").innerHTML = "🎉 بازی تمام شد! دکمه بازی جدید را بزن.";
-    return;
-  }
-  
+  if (waitingForQuestion) { document.getElementById("feedback").innerHTML = "⚠️ اول به سوال جواب بده!"; return; }
+  if (playerPos === 25) { document.getElementById("feedback").innerHTML = "🎉 بازی تمام شد! دکمه بازی جدید را بزن."; return; }
   diceValue = Math.floor(Math.random() * 6) + 1;
   document.getElementById("diceResult").innerHTML = "🎲 " + diceValue;
   showQuestion();
@@ -526,7 +409,6 @@ function restartGame() {
 
 document.getElementById("diceBtn").onclick = rollDice;
 document.getElementById("restartBtn").onclick = restartGame;
-
 renderBoard();
 document.getElementById("questionText").innerHTML = "برای شروع، تاس بینداز!";
 </script>

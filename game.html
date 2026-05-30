@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>زیست‌یار | مار و پله بی‌مهرگان</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0b1f3a, #0f766e);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.container {
+  background: white;
+  max-width: 1100px;
+  width: 100%;
+  border-radius: 45px;
+  padding: 25px;
+  box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+}
+
+.school-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.school-icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #1e3a5f, #0f766e);
+  border-radius: 50%;
+  line-height: 60px;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.school-name {
+  background: #e0f2fe;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1e3a5f;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 10px 0;
+  background: linear-gradient(135deg, #0b1f3a, #0f766e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* صفحه اصلی بازی */
+.game-area {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* تخته بازی 6x6 (36 خانه) */
+.board {
+  background: #f1f5f9;
+  border-radius: 25px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  max-width: 500px;
+  flex: 1;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #0b1f3a;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.cell.player {
+  background: #0ea5e9;
+  color: white;
+  box-shadow: 0 0 0 3px #fbbf24;
+}
+
+.cell.snake {
+  background: #ef4444;
+  color: white;
+}
+
+.cell.ladder {
+  background: #22c55e;
+  color: white;
+}
+
+/* پنل سوال */
+.question-panel {
+  background: #f8fafc;
+  border-radius: 30px;
+  padding: 20px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.question-text {
+  background: #f1f5f9;
+  padding: 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  border-right: 4px solid #0f766e;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.opt-btn {
+  padding: 14px;
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  border-radius: 35px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+}
+
+.opt-btn:hover {
+  transform: translateY(-2px);
+  background: #0284c7;
+}
+
+.opt-btn.correct-effect {
+  background: #22c55e;
+}
+
+.opt-btn.wrong-effect {
+  background: #ef4444;
+  animation: shake 0.3s;
+}
+
+.feedback {
+  padding: 12px;
+  border-radius: 20px;
+  margin: 15px 0;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.dice-area {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.dice-btn {
+  background: #fbbf24;
+  color: #0b1f3a;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dice-btn:active {
+  transform: scale(0.95);
+}
+
+.dice-result {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.score-board {
+  margin-top: 20px;
+  text-align: center;
+  background: #e2e8f0;
+  padding: 10px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+.restart-btn {
+  background: #0f766e;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .board {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 100%;
+  }
+  .cell {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="school-header">
+    <div class="school-icon">🧬</div>
+    <div class="school-name">🏫 مدرسه فرزانگان ۱ شهریار</div>
+    <h1>🎲 مار و پله بی‌مهرگان 🐍</h1>
+    <p style="font-size:0.8rem; text-align:center; margin-bottom:15px;">تاس بینداز، به سوال درست جواب بده تا جلو بروی!</p>
+  </div>
+
+  <div class="game-area">
+    <!-- تخته بازی -->
+    <div class="board" id="board"></div>
+
+    <!-- پنل سوال -->
+    <div class="question-panel" id="questionPanel">
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsDiv"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="dice-area">
+        <button class="dice-btn" id="diceBtn">🎲 تاس بنداز</button>
+        <div class="dice-result" id="diceResult"></div>
+      </div>
+      <div class="score-board">
+        🎯 موقعیت شما: خانه <span id="playerPos">1</span> از 36
+      </div>
+      <button class="restart-btn" id="restartBtn">🔄 بازی جدید</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== سوالات (علوم نهم - بی‌مهرگان و فصل 15) ==========
+const questions = [
+  {
+    text: "کدام یک از موارد زیر جزو کرم‌های حلقوی است؟",
+    options: ["کرم خاکی", "کرم کدو", "اسکاریس"],
+    correct: 0,
+    explanation: "✅ کرم خاکی از شاخه آنلیدا (کرم‌های حلقوی) است. کرم کدو از پهن‌کرم‌ها و اسکاریس از لوله‌ای‌هاست."
+  },
+  {
+    text: "کرم اسکاریس از کدام گروه کرم‌ها است؟",
+    options: ["پهن", "لوله‌ای", "حلقوی"],
+    correct: 1,
+    explanation: "✅ اسکاریس از شاخه نماتودا (کرم‌های لوله‌ای) است که در روده انسان زندگی می‌کند."
+  },
+  {
+    text: "کدام یک از کرم‌های زیر زندگی انگلی دارد؟",
+    options: ["کرم خاکی", "زالو", "کرم ابریشم"],
+    correct: 1,
+    explanation: "✅ زالو برخی گونه‌هایش خون‌خوار و انگل خارجی موقت است. کرم خاکی و کرم ابریشم آزادزی هستند."
+  },
+  {
+    text: "کدام یک از بندپایان دو جفت پا در هر بند دارد؟",
+    options: ["حشرات", "عنکبوتیان", "هزارپایان"],
+    correct: 2,
+    explanation: "✅ هزارپایان در هر بند دو جفت پا دارند. حشرات سه جفت پا و عنکبوتیان چهار جفت پا دارند."
+  },
+  {
+    text: "کدام یک از جانوران زیر جزو نرم‌تنان است؟",
+    options: ["خرچنگ", "حلزون", "عنکبوت"],
+    correct: 1,
+    explanation: "✅ حلزون از شاخه نرم‌تنان (Mollusca) است. خرچنگ بندپا و عنکبوت عنکبوتیان است."
+  },
+  {
+    text: "کدام یک از حشرات دگردیسی کامل دارد؟",
+    options: ["ملخ", "سوسک", "پروانه"],
+    correct: 2,
+    explanation: "✅ پروانه دارای دگردیسی کامل (تخم-لارو-شفیره-حشره کامل) است. ملخ و سوسک دگردیسی ناقص دارند."
+  },
+  {
+    text: "کدام یک از موارد زیر از ویژگی‌های بندپایان نیست؟",
+    options: ["اسکلت خارجی", "بدن قطعه‌قطعه", "اسکلت داخلی"],
+    correct: 2,
+    explanation: "✅ بندپایان اسکلت خارجی دارند، نه اسکلت داخلی."
+  },
+  {
+    text: "کدام گروه از بی‌مهرگان دارای کیسه گوارش هستند؟",
+    options: ["کرم‌های پهن", "کرم‌های حلقوی", "نرم‌تنان"],
+    correct: 0,
+    explanation: "✅ کرم‌های پهن (مانند کرم کدو) دارای کیسه گوارش هستند (یک دهانه برای ورود و خروج غذا)."
+  },
+  {
+    text: "کدام جانور از طریق آبشش تنفس می‌کند؟",
+    options: ["حلزون خشکی", "خرچنگ", "عنکبوت"],
+    correct: 1,
+    explanation: "✅ خرچنگ سخت‌پوستی است که با آبشش تنفس می‌کند. حلزون خشکی با کیسه ریه و عنکبوت با شش کتابی تنفس می‌کند."
+  },
+  {
+    text: "کدام یک از جانوران زیر تقارن شعاعی دارد؟",
+    options: ["کرم خاکی", "ماهی", "ستاره دریایی"],
+    correct: 2,
+    explanation: "✅ ستاره دریایی (خارپوستان) تقارن شعاعی دارد. کرم خاکی و ماهی تقارن دوطرفه دارند."
+  },
+  {
+    text: "کدام یک از موارد زیر جزو زنبورهای اجتماعی است؟",
+    options: ["زنبور عسل", "زنبور گال‌زا", "زنبور تنها"],
+    correct: 0,
+    explanation: "✅ زنبور عسل یک حشره اجتماعی است و در کلنی زندگی می‌کند."
+  },
+  {
+    text: "کرم کدو از کدام گروه کرم‌ها است؟",
+    options: ["پهن", "لوله‌ای", "حلقوی"],
+    correct: 0,
+    explanation: "✅ کرم کدو (Tenía) از شاخه کرم‌های پهن (Platyhelminthes) است."
+  }
+];
+
+// موقعیت‌های ویژه (مارها و پله‌ها)
+const snakes = {
+  34: 18,  // مار از 34 به 18
+  28: 12,  // مار از 28 به 12
+  22: 8,   // مار از 22 به 8
+  15: 5    // مار از 15 به 5
+};
+
+const ladders = {
+  3: 19,   // پله از 3 به 19
+  6: 27,   // پله از 6 به 27
+  9: 31,   // پله از 9 به 31
+  17: 36   // پله از 17 به 36
+};
+
+let playerPos = 1;
+let diceValue = 0;
+let waitingForQuestion = false;
+let currentQuestion = null;
+let currentQuestionIndex = null;
+let answered = false;
+
+// گرفتن سوال تصادفی
+function getRandomQuestion() {
+  const randomIndex = Math.floor(Math.random() * questions.length);
+  return { ...questions[randomIndex], index: randomIndex };
+}
+
+function renderBoard() {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
+  for (let i = 36; i >= 1; i--) {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+    cell.innerText = i;
+    
+    if (playerPos === i) {
+      cell.classList.add("player");
+    }
+    if (snakes[i]) {
+      cell.classList.add("snake");
+      cell.innerText = i + "🐍";
+    }
+    if (ladders[i]) {
+      cell.classList.add("ladder");
+      cell.innerText = i + "🪜";
+    }
+    
+    board.appendChild(cell);
+  }
+}
+
+function showQuestion() {
+  const q = getRandomQuestion();
+  currentQuestion = q;
+  currentQuestionIndex = q.index;
+  answered = false;
+  
+  document.getElementById("questionText").innerHTML = q.text;
+  const optionsDiv = document.getElementById("optionsDiv");
+  optionsDiv.innerHTML = "";
+  
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "opt-btn";
+    btn.innerText = opt;
+    btn.onclick = () => checkAnswer(idx, btn);
+    optionsDiv.appendChild(btn);
+  });
+  
+  document.getElementById("feedback").innerHTML = "";
+  document.getElementById("feedback").style.background = "";
+  document.getElementById("diceBtn").disabled = true;
+  waitingForQuestion = true;
+}
+
+function checkAnswer(selectedIdx, btnElement) {
+  if (!waitingForQuestion || answered) return;
+  answered = true;
+  
+  const isCorrect = (selectedIdx === currentQuestion.correct);
+  const feedbackDiv = document.getElementById("feedback");
+  
+  if (isCorrect) {
+    btnElement.classList.add("correct-effect");
+    feedbackDiv.innerHTML = "✅ " + currentQuestion.explanation;
+    feedbackDiv.style.background = "#dcfce7";
+    feedbackDiv.style.color = "#166534";
+    
+    // حرکت به جلو
+    let newPos = playerPos + diceValue;
+    if (newPos > 36) newPos = 36;
+    
+    // چک مار و پله
+    if (ladders[newPos]) {
+      newPos = ladders[newPos];
+      feedbackDiv.innerHTML += "<br>🎉 پله! به خانه " + newPos + " رفتی!";
+    }
+    if (snakes[newPos]) {
+      newPos = snakes[newPos];
+      feedbackDiv.innerHTML += "<br>🐍 مار! به خانه " + newPos + " رفتی!";
+    }
+    
+    playerPos = newPos;
+    document.getElementById("playerPos").innerText = playerPos;
+    renderBoard();
+    
+    if (playerPos === 36) {
+      feedbackDiv.innerHTML = "🎉🎊 تبریک! به انتهای بازی رسیدی! 🎊🎉";
+      document.getElementById("diceBtn").disabled = true;
+      waitingForQuestion = false;
+      return;
+    }
+  } else {
+    btnElement.classList.add("wrong-effect");
+    const correctAns = currentQuestion.options[currentQuestion.correct];
+    feedbackDiv.innerHTML = "❌ اشتباه! پاسخ صحیح: " + correctAns + "<br>" + currentQuestion.explanation;
+    feedbackDiv.style.background = "#fee2e2";
+    feedbackDiv.style.color = "#991b1b";
+    
+    // حرکت نمی‌کند (در جای خود می‌ماند)
+    // فقط پیام نمایش داده می‌شود
+  }
+  
+  setTimeout(() => {
+    waitingForQuestion = false;
+    document.getElementById("diceBtn").disabled = false;
+    document.getElementById("optionsDiv").innerHTML = "";
+    document.getElementById("questionText").innerHTML = "برای شروع، تاس بینداز!";
+    document.getElementById("feedback").innerHTML = "";
+  }, 3000);
+}
+
+function rollDice() {
+  if (waitingForQuestion) {
+    document.getElementById("feedback").innerHTML = "⚠️ اول به سوال جواب بده!";
+    return;
+  }
+  if (playerPos === 36) {
+    document.getElementById("feedback").innerHTML = "🎉 بازی تمام شد! دکمه بازی جدید را بزن.";
+    return;
+  }
+  
+  diceValue = Math.floor(Math.random() * 6) + 1;
+  document.getElementById("diceResult").innerHTML = "🎲 " + diceValue;
+  showQuestion();
+}
+
+function restartGame() {
+  playerPos = 1;
+  waitingForQuestion = false;
+  answered = false;
+  document.getElementById("playerPos").innerText = "1";
+  document.getElementById("diceResult").innerHTML = "";
+  document.getElementById("questionText").innerHTML = "برای شروع، تاس بینداز!";
+  document.getElementById("optionsDiv").innerHTML = "";
+  document.getElementById("feedback").innerHTML = "";
+  document.getElementById("diceBtn").disabled = false;
+  renderBoard();
+}
+
+document.getElementById("diceBtn").onclick = rollDice;
+document.getElementById("restartBtn").onclick = restartGame;
+
+renderBoard();
+document.getElementById("questionText").innerHTML = "برای شروع، تاس بینداز!";
+</script>
+</body>
+</html>

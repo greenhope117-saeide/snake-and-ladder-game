@@ -60,11 +60,19 @@ body {
 h1 {
   text-align: center;
   font-size: 1.6rem;
-  margin: 10px 0;
+  margin: 10px 0 5px;
   background: linear-gradient(135deg, #0b1f3a, #0f766e);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.designer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #0f766e;
+  margin-bottom: 15px;
+  font-weight: 500;
 }
 
 /* صفحه اصلی بازی */
@@ -261,7 +269,8 @@ h1 {
     <div class="school-icon">🧬</div>
     <div class="school-name">🏫 مدرسه فرزانگان ۱ شهریار</div>
     <h1>🎲 مار و پله بی‌مهرگان 🐍</h1>
-    <p style="font-size:0.8rem; text-align:center; margin-bottom:15px;">تاس بینداز، به سوال درست جواب بده تا جلو بروی!</p>
+    <div class="designer">✨ طراح: سرکار خانم معصومه مرتجایی</div>
+    <p style="font-size:0.75rem; text-align:center; margin-top:5px;">تاس بینداز، به سوال درست جواب بده تا جلو بروی!</p>
   </div>
 
   <div class="game-area">
@@ -364,27 +373,25 @@ const questions = [
 
 // موقعیت‌های ویژه (مارها و پله‌ها)
 const snakes = {
-  34: 18,  // مار از 34 به 18
-  28: 12,  // مار از 28 به 12
-  22: 8,   // مار از 22 به 8
-  15: 5    // مار از 15 به 5
+  34: 18,
+  28: 12,
+  22: 8,
+  15: 5
 };
 
 const ladders = {
-  3: 19,   // پله از 3 به 19
-  6: 27,   // پله از 6 به 27
-  9: 31,   // پله از 9 به 31
-  17: 36   // پله از 17 به 36
+  3: 19,
+  6: 27,
+  9: 31,
+  17: 36
 };
 
 let playerPos = 1;
 let diceValue = 0;
 let waitingForQuestion = false;
 let currentQuestion = null;
-let currentQuestionIndex = null;
 let answered = false;
 
-// گرفتن سوال تصادفی
 function getRandomQuestion() {
   const randomIndex = Math.floor(Math.random() * questions.length);
   return { ...questions[randomIndex], index: randomIndex };
@@ -417,7 +424,6 @@ function renderBoard() {
 function showQuestion() {
   const q = getRandomQuestion();
   currentQuestion = q;
-  currentQuestionIndex = q.index;
   answered = false;
   
   document.getElementById("questionText").innerHTML = q.text;
@@ -451,11 +457,9 @@ function checkAnswer(selectedIdx, btnElement) {
     feedbackDiv.style.background = "#dcfce7";
     feedbackDiv.style.color = "#166534";
     
-    // حرکت به جلو
     let newPos = playerPos + diceValue;
     if (newPos > 36) newPos = 36;
     
-    // چک مار و پله
     if (ladders[newPos]) {
       newPos = ladders[newPos];
       feedbackDiv.innerHTML += "<br>🎉 پله! به خانه " + newPos + " رفتی!";
@@ -481,9 +485,6 @@ function checkAnswer(selectedIdx, btnElement) {
     feedbackDiv.innerHTML = "❌ اشتباه! پاسخ صحیح: " + correctAns + "<br>" + currentQuestion.explanation;
     feedbackDiv.style.background = "#fee2e2";
     feedbackDiv.style.color = "#991b1b";
-    
-    // حرکت نمی‌کند (در جای خود می‌ماند)
-    // فقط پیام نمایش داده می‌شود
   }
   
   setTimeout(() => {

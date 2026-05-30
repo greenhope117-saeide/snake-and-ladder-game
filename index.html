@@ -270,32 +270,32 @@ h1 {
 </div>
 
 <script>
-// ========== 24 سوال کاملاً غیر تکراری ==========
-const questions = [
-  { text: "کدام یک از موارد زیر جزو کرم‌های حلقوی است؟", options: ["کرم خاکی", "کرم کدو", "اسکاریس"], correct: 0, explanation: "✅ کرم خاکی از شاخه آنلیدا (کرم‌های حلقوی) است." },
-  { text: "کرم اسکاریس از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 1, explanation: "✅ اسکاریس از شاخه نماتودا (کرم‌های لوله‌ای) است." },
-  { text: "کدام یک از کرم‌های زیر زندگی آزاد دارد؟", options: ["کرم کدو", "پلاناریا", "کپلک"], correct: 1, explanation: "✅ پلاناریا از کرم‌های پهن آزادزی است." },
-  { text: "کدامیک جزو سخت پوستان است؟", options: ["کنه", "خرخاکی", "عقرب"], correct: 1, explanation: "✅ خرخاکی از زیرشاخه سخت پوستان است." },
-  { text: "کدامیک ۸ پا دارد؟", options: ["خرخاکی", "ملخ", "عقرب"], correct: 2, explanation: "✅ عقرب از عنکبوتیان و ۸ پا دارد." },
-  { text: "کدامیک دگردیسی ناقص دارد؟", options: ["پروانه", "ملخ", "پشه"], correct: 1, explanation: "✅ ملخ دارای دگردیسی ناقص است." },
-  { text: "کدامیک دستگاه گردش آب دارد؟", options: ["مرجان", "اسفنج", "ستاره دریایی"], correct: 2, explanation: "✅ ستاره دریایی (خارپوستان) دارای دستگاه گردش آب است." },
-  { text: "کدامیک در روده سگ بالغ می‌شود؟", options: ["کرم کدو", "کپلک", "مولد کیست هیداتیک"], correct: 0, explanation: "✅ کرم کدو بالغ در روده سگ زندگی می‌کند." },
-  { text: "کدامیک در روده بزرگ زندگی می‌کند؟", options: ["آسکاریس", "کرم قلابدار", "کرمک"], correct: 2, explanation: "✅ کرمک در روده بزرگ و ناحیه مقعد زندگی می‌کند." },
-  { text: "کدام یک از بندپایان دو جفت پا در هر بند دارد؟", options: ["حشرات", "عنکبوتیان", "هزارپایان"], correct: 2, explanation: "✅ هزارپایان در هر بند دو جفت پا دارند." },
-  { text: "کدام یک از جانوران زیر جزو نرم‌تنان است؟", options: ["خرچنگ", "حلزون", "عنکبوت"], correct: 1, explanation: "✅ حلزون از شاخه نرم‌تنان است." },
-  { text: "کدام یک از موارد زیر از ویژگی‌های بندپایان نیست؟", options: ["اسکلت خارجی", "بدن قطعه‌قطعه", "اسکلت داخلی"], correct: 2, explanation: "✅ بندپایان اسکلت خارجی دارند، نه داخلی." },
-  { text: "کدام گروه از بی‌مهرگان دارای کیسه گوارش هستند؟", options: ["کرم‌های پهن", "کرم‌های حلقوی", "نرم‌تنان"], correct: 0, explanation: "✅ کرم‌های پهن دارای کیسه گوارش هستند." },
-  { text: "کدام جانور از طریق آبشش تنفس می‌کند؟", options: ["حلزون خشکی", "خرچنگ", "عنکبوت"], correct: 1, explanation: "✅ خرچنگ با آبشش تنفس می‌کند." },
-  { text: "کدام یک از جانوران زیر تقارن شعاعی دارد؟", options: ["کرم خاکی", "ماهی", "ستاره دریایی"], correct: 2, explanation: "✅ ستاره دریایی تقارن شعاعی دارد." },
-  { text: "کدام یک از موارد زیر جزو زنبورهای اجتماعی است؟", options: ["زنبور عسل", "زنبور گال‌زا", "زنبور تنها"], correct: 0, explanation: "✅ زنبور عسل یک حشره اجتماعی است." },
-  { text: "کرم کدو از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 0, explanation: "✅ کرم کدو از شاخه کرم‌های پهن است." },
-  { text: "کدامیک از حشرات دگردیسی کامل دارد؟", options: ["ملخ", "سوسک", "پروانه"], correct: 2, explanation: "✅ پروانه دارای دگردیسی کامل است." },
-  { text: "کدامیک از کرم‌های زیر در روده کوچک زندگی می‌کند؟", options: ["کرمک", "آسکاریس", "کرم قلابدار"], correct: 1, explanation: "✅ آسکاریس در روده کوچک زندگی می‌کند." },
-  { text: "کدامیک از بندپایان سه جفت پا دارد؟", options: ["عنکبوت", "خرچنگ", "ملخ"], correct: 2, explanation: "✅ ملخ از حشرات و ۶ پا (سه جفت) دارد." },
-  { text: "کدامیک دارای اسکلت آهکی است؟", options: ["خرچنگ", "عنکبوت", "کرم خاکی"], correct: 0, explanation: "✅ خرچنگ از سخت پوستان و دارای اسکلت آهکی است." },
-  { text: "کدامیک از بی‌مهرگان در آب شیرین زندگی می‌کند؟", options: ["اسفنج دریایی", "پلاناریا", "ستاره دریایی"], correct: 1, explanation: "✅ پلاناریا از کرم‌های پهن آب شیرین است." },
-  { text: "کدامیک از کرم‌های زیر انگل خارجی موقت است؟", options: ["کرم خاکی", "زالو", "پلاناریا"], correct: 1, explanation: "✅ زالو برخی گونه‌هایش انگل خارجی موقت است." },
-  { text: "میزبان واسط کرم کدو چیست؟", options: ["انسان", "گاو و خوک", "سگ"], correct: 1, explanation: "✅ گاو و خوک میزبان واسط کرم کدو هستند." }
+// ========== 24 سوال کاملاً منحصربفرد و بدون هیچ تکراری ==========
+const MASTER_QUESTIONS = [
+  { id: 0, text: "کدام یک از موارد زیر جزو کرم‌های حلقوی است؟", options: ["کرم خاکی", "کرم کدو", "اسکاریس"], correct: 0, explanation: "✅ کرم خاکی از شاخه آنلیدا (کرم‌های حلقوی) است." },
+  { id: 1, text: "کرم اسکاریس از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 1, explanation: "✅ اسکاریس از شاخه نماتودا (کرم‌های لوله‌ای) است." },
+  { id: 2, text: "کدام یک از کرم‌های زیر زندگی آزاد دارد؟", options: ["کرم کدو", "پلاناریا", "کپلک"], correct: 1, explanation: "✅ پلاناریا از کرم‌های پهن آزادزی است." },
+  { id: 3, text: "کدامیک جزو سخت پوستان است؟", options: ["کنه", "خرخاکی", "عقرب"], correct: 1, explanation: "✅ خرخاکی (گوش‌خوارک) از زیرشاخه سخت پوستان است." },
+  { id: 4, text: "کدامیک ۸ پا دارد؟", options: ["خرخاکی", "ملخ", "عقرب"], correct: 2, explanation: "✅ عقرب از عنکبوتیان و ۸ پا دارد. حشرات ۶ پا دارند." },
+  { id: 5, text: "کدامیک دگردیسی ناقص دارد؟", options: ["پروانه", "ملخ", "پشه"], correct: 1, explanation: "✅ ملخ دارای دگردیسی ناقص (تخم-پورگی-حشره کامل) است." },
+  { id: 6, text: "کدامیک دستگاه گردش آب دارد؟", options: ["مرجان", "اسفنج", "ستاره دریایی"], correct: 2, explanation: "✅ ستاره دریایی (خارپوستان) دارای دستگاه گردش آب است." },
+  { id: 7, text: "کدامیک در روده سگ بالغ می‌شود؟", options: ["کرم کدو", "کپلک", "مولد کیست هیداتیک"], correct: 0, explanation: "✅ کرم کدو (Echinococcus) بالغ در روده سگ زندگی می‌کند." },
+  { id: 8, text: "کدامیک در روده بزرگ زندگی می‌کند؟", options: ["آسکاریس", "کرم قلابدار", "کرمک"], correct: 2, explanation: "✅ کرمک در روده بزرگ و ناحیه مقعد زندگی می‌کند." },
+  { id: 9, text: "کدام یک از بندپایان دو جفت پا در هر بند دارد؟", options: ["حشرات", "عنکبوتیان", "هزارپایان"], correct: 2, explanation: "✅ هزارپایان در هر بند دو جفت پا دارند." },
+  { id: 10, text: "کدام یک از جانوران زیر جزو نرم‌تنان است؟", options: ["خرچنگ", "حلزون", "عنکبوت"], correct: 1, explanation: "✅ حلزون از شاخه نرم‌تنان (Mollusca) است." },
+  { id: 11, text: "کدام یک از ویژگی‌های بندپایان نیست؟", options: ["اسکلت خارجی", "بدن قطعه‌قطعه", "اسکلت داخلی"], correct: 2, explanation: "✅ بندپایان اسکلت خارجی دارند، نه اسکلت داخلی." },
+  { id: 12, text: "کدام گروه از بی‌مهرگان دارای کیسه گوارش هستند؟", options: ["کرم‌های پهن", "کرم‌های حلقوی", "نرم‌تنان"], correct: 0, explanation: "✅ کرم‌های پهن (مانند کرم کدو) دارای کیسه گوارش هستند." },
+  { id: 13, text: "کدام جانور از طریق آبشش تنفس می‌کند؟", options: ["حلزون خشکی", "خرچنگ", "عنکبوت"], correct: 1, explanation: "✅ خرچنگ سخت‌پوستی است که با آبشش تنفس می‌کند." },
+  { id: 14, text: "کدام یک از جانوران زیر تقارن شعاعی دارد؟", options: ["کرم خاکی", "ماهی", "ستاره دریایی"], correct: 2, explanation: "✅ ستاره دریایی (خارپوستان) تقارن شعاعی دارد." },
+  { id: 15, text: "کدام یک از موارد زیر جزو زنبورهای اجتماعی است؟", options: ["زنبور عسل", "زنبور گال‌زا", "زنبور تنها"], correct: 0, explanation: "✅ زنبور عسل در کلنی زندگی می‌کند و حشره‌ای اجتماعی است." },
+  { id: 16, text: "کرم کدو از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 0, explanation: "✅ کرم کدو (Tenía) از شاخه کرم‌های پهن (Platyhelminthes) است." },
+  { id: 17, text: "کدامیک از حشرات دگردیسی کامل دارد؟", options: ["ملخ", "سوسک", "پروانه"], correct: 2, explanation: "✅ پروانه دارای دگردیسی کامل (تخم-لارو-شفیره-حشره کامل) است." },
+  { id: 18, text: "کدامیک از کرم‌های زیر در روده کوچک زندگی می‌کند؟", options: ["کرمک", "آسکاریس", "کرم قلابدار"], correct: 1, explanation: "✅ آسکاریس در روده کوچک انسان زندگی می‌کند." },
+  { id: 19, text: "کدامیک از بندپایان سه جفت پا دارد؟", options: ["عنکبوت", "خرچنگ", "ملخ"], correct: 2, explanation: "✅ ملخ از حشرات و ۶ پا (سه جفت) دارد." },
+  { id: 20, text: "کدامیک دارای اسکلت آهکی است؟", options: ["خرچنگ", "عنکبوت", "کرم خاکی"], correct: 0, explanation: "✅ خرچنگ از سخت پوستان و دارای اسکلت آهکی است." },
+  { id: 21, text: "کدامیک از بی‌مهرگان در آب شیرین زندگی می‌کند؟", options: ["اسفنج دریایی", "پلاناریا", "ستاره دریایی"], correct: 1, explanation: "✅ پلاناریا از کرم‌های پهن آب شیرین است." },
+  { id: 22, text: "کدامیک از کرم‌های زیر انگل خارجی موقت است؟", options: ["کرم خاکی", "زالو", "پلاناریا"], correct: 1, explanation: "✅ زالو برخی گونه‌هایش انگل خارجی موقت (خون‌خوار) است." },
+  { id: 23, text: "میزبان واسط کرم کدو چیست؟", options: ["انسان", "گاو و خوک", "سگ"], correct: 1, explanation: "✅ گاو و خوک میزبان واسط کرم کدو هستند. انسان میزبان اصلی است." }
 ];
 
 // مارها و پله‌ها (مسیر 25 خانه‌ای)
@@ -308,9 +308,27 @@ let waitingForQuestion = false;
 let currentQuestion = null;
 let answered = false;
 
-function getRandomQuestion() {
-  const randomIndex = Math.floor(Math.random() * questions.length);
-  return { ...questions[randomIndex], index: randomIndex };
+// مدیریت سوالات استفاده شده برای جلوگیری از تکرار
+let usedQuestionIds = [];
+let availableQuestions = [...MASTER_QUESTIONS];
+
+// تابع برای گرفتن سوال جدید (تکراری نمی‌شود)
+function getFreshQuestion() {
+  // اگر همه سوالات استفاده شدند، لیست را دوباره پر کن (اما اولویت با سوالات کم‌استفاده‌تر نیست، فقط چرخه می‌زند)
+  if (availableQuestions.length === 0) {
+    // بازیابی مجدد همه سوالات
+    availableQuestions = MASTER_QUESTIONS.map(q => ({ ...q }));
+    usedQuestionIds = [];
+  }
+  
+  // انتخاب تصادفی از سوالات باقیمانده
+  const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+  const selected = availableQuestions[randomIndex];
+  // حذف سوال انتخاب شده از لیست موجود
+  availableQuestions.splice(randomIndex, 1);
+  usedQuestionIds.push(selected.id);
+  
+  return { ...selected };
 }
 
 function renderBoard() {
@@ -328,7 +346,7 @@ function renderBoard() {
 }
 
 function showQuestion() {
-  const q = getRandomQuestion();
+  const q = getFreshQuestion();
   currentQuestion = q;
   answered = false;
   document.getElementById("questionText").innerHTML = q.text;
@@ -365,7 +383,7 @@ function checkAnswer(selectedIdx, btnElement) {
     document.getElementById("playerPos").innerText = playerPos;
     renderBoard();
     if (playerPos === 25) {
-      feedbackDiv.innerHTML = "🎉🎊 تبریک! به انتهای بازی رسیدی! 🎊🎉";
+      feedbackDiv.innerHTML = "🎉🎊 تبریک! به انتهای بازی رسیدی! 🎊🎉<br>✅ تعداد سوالات پاسخ داده شده: " + usedQuestionIds.length;
       document.getElementById("diceBtn").disabled = true;
       waitingForQuestion = false;
       return;
@@ -376,19 +394,34 @@ function checkAnswer(selectedIdx, btnElement) {
     feedbackDiv.innerHTML = "❌ اشتباه! پاسخ صحیح: " + correctAns + "<br>" + currentQuestion.explanation;
     feedbackDiv.style.background = "#fee2e2";
     feedbackDiv.style.color = "#991b1b";
+    
+    // سوال اشتباه پاسخ داده شده دوباره به لیست موجود برمی‌گردد تا بعداً دوباره پرسیده شود
+    // ولی سوال فعلی از لیست حذف شده بود، نیازی به برگرداندن نیست چون کاربر اشتباه کرده باید دوباره تلاش کند
+    // اما سوالی که اشتباه جواب داده شده باید دوباره در چرخه قرار گیرد
+    // به همین دلیل currentQuestion را دوباره به availableQuestions اضافه می‌کنیم
+    if (currentQuestion && !availableQuestions.some(q => q.id === currentQuestion.id)) {
+      availableQuestions.push({ ...currentQuestion });
+    }
   }
+  
   setTimeout(() => {
     waitingForQuestion = false;
     document.getElementById("diceBtn").disabled = false;
     document.getElementById("optionsDiv").innerHTML = "";
     document.getElementById("questionText").innerHTML = "برای شروع، تاس بینداز!";
     document.getElementById("feedback").innerHTML = "";
-  }, 3000);
+  }, 2800);
 }
 
 function rollDice() {
-  if (waitingForQuestion) { document.getElementById("feedback").innerHTML = "⚠️ اول به سوال جواب بده!"; return; }
-  if (playerPos === 25) { document.getElementById("feedback").innerHTML = "🎉 بازی تمام شد! دکمه بازی جدید را بزن."; return; }
+  if (waitingForQuestion) { 
+    document.getElementById("feedback").innerHTML = "⚠️ اول به سوال جواب بده!"; 
+    return; 
+  }
+  if (playerPos === 25) { 
+    document.getElementById("feedback").innerHTML = "🎉 بازی تمام شد! دکمه بازی جدید را بزن."; 
+    return; 
+  }
   diceValue = Math.floor(Math.random() * 6) + 1;
   document.getElementById("diceResult").innerHTML = "🎲 " + diceValue;
   showQuestion();
@@ -398,6 +431,10 @@ function restartGame() {
   playerPos = 1;
   waitingForQuestion = false;
   answered = false;
+  // بازنشانی لیست سوالات
+  availableQuestions = MASTER_QUESTIONS.map(q => ({ ...q }));
+  usedQuestionIds = [];
+  
   document.getElementById("playerPos").innerText = "1";
   document.getElementById("diceResult").innerHTML = "";
   document.getElementById("questionText").innerHTML = "برای شروع، تاس بینداز!";

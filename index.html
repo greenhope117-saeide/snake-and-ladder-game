@@ -226,6 +226,12 @@ h1 {
   cursor: pointer;
 }
 
+.questions-count {
+  font-size: 0.7rem;
+  color: #0f766e;
+  margin-top: 8px;
+}
+
 @keyframes shake {
   0%,100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
@@ -264,13 +270,14 @@ h1 {
         <div class="dice-result" id="diceResult"></div>
       </div>
       <div class="score-board">📍 موقعیت شما: خانه <span id="playerPos">1</span> از 25</div>
+      <div class="questions-count" id="questionsCount">📋 سوالات باقیمانده: 24</div>
       <button class="restart-btn" id="restartBtn">🔄 بازی جدید</button>
     </div>
   </div>
 </div>
 
 <script>
-// ========== 24 سوال کاملاً منحصربفرد و بدون هیچ تکراری ==========
+// ========== 24 سوال کاملاً منحصربفرد ==========
 const MASTER_QUESTIONS = [
   { id: 0, text: "کدام یک از موارد زیر جزو کرم‌های حلقوی است؟", options: ["کرم خاکی", "کرم کدو", "اسکاریس"], correct: 0, explanation: "✅ کرم خاکی از شاخه آنلیدا (کرم‌های حلقوی) است." },
   { id: 1, text: "کرم اسکاریس از کدام گروه کرم‌ها است؟", options: ["پهن", "لوله‌ای", "حلقوی"], correct: 1, explanation: "✅ اسکاریس از شاخه نماتودا (کرم‌های لوله‌ای) است." },
@@ -308,26 +315,31 @@ let waitingForQuestion = false;
 let currentQuestion = null;
 let answered = false;
 
-// مدیریت سوالات استفاده شده برای جلوگیری از تکرار
-let usedQuestionIds = [];
-let availableQuestions = [...MASTER_QUESTIONS];
+// سیستم جلوگیری از تکرار سوال - هر سوال فقط یک بار پرسیده می‌شود
+let remainingQuestions = [];
 
-// تابع برای گرفتن سوال جدید (تکراری نمی‌شود)
-function getFreshQuestion() {
-  // اگر همه سوالات استفاده شدند، لیست را دوباره پر کن (اما اولویت با سوالات کم‌استفاده‌تر نیست، فقط چرخه می‌زند)
-  if (availableQuestions.length === 0) {
-    // بازیابی مجدد همه سوالات
-    availableQuestions = MASTER_QUESTIONS.map(q => ({ ...q }));
-    usedQuestionIds = [];
+function initializeRemainingQuestions() {
+  // کپی از تمام سوالات
+  remainingQuestions = MASTER_QUESTIONS.map(q => ({ ...q }));
+  updateQuestionsCountDisplay();
+}
+
+function updateQuestionsCountDisplay() {
+  document.getElementById("questionsCount").innerHTML = `📋 سوالات باقیمانده: ${remainingQuestions.length}`;
+}
+
+function getNextQuestion() {
+  if (remainingQuestions.length === 0) {
+    // همه سوالات پرسیده شد
+    return null;
   }
   
   // انتخاب تصادفی از سوالات باقیمانده
-  const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-  const selected = availableQuestions[randomIndex];
-  // حذف سوال انتخاب شده از لیست موجود
-  availableQuestions.splice(randomIndex, 1);
-  usedQuestionIds.push(selected.id);
-  
+  const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
+  const selected = remainingQuestions[randomIndex];
+  // حذف سوال از لیست (دیگر تکرار نمی‌شود)
+  remainingQuestions.splice(randomIndex, 1);
+  updateQuestionsCountDisplay();
   return { ...selected };
 }
 
@@ -346,7 +358,18 @@ function renderBoard() {
 }
 
 function showQuestion() {
-  const q = getFreshQuestion();
+  const q = getNextQuestion();
+  
+  // اگر سوالی باقی نمانده باشد
+  if (q === null) {
+    document.getElementById("questionText").innerHTML = "🎉 تبریک! همه سوالات را پاسخ دادی! 🎉";
+    document.getElementById("optionsDiv").innerHTML = "";
+    document.getElementById("feedback").innerHTML = "برای شروع بازی جدید، دکمه 'بازی جدید' را بزن.";
+    document.getElementById("diceBtn").disabled = true;
+    waitingForQuestion = false;
+    return;
+  }
+  
   currentQuestion = q;
   answered = false;
   document.getElementById("questionText").innerHTML = q.text;
@@ -383,7 +406,7 @@ function checkAnswer(selectedIdx, btnElement) {
     document.getElementById("playerPos").innerText = playerPos;
     renderBoard();
     if (playerPos === 25) {
-      feedbackDiv.innerHTML = "🎉🎊 تبریک! به انتهای بازی رسیدی! 🎊🎉<br>✅ تعداد سوالات پاسخ داده شده: " + usedQuestionIds.length;
+      feedbackDiv.innerHTML = "🎉🎊 تبریک! به انتهای بازی رسیدی! 🎊🎉";
       document.getElementById("diceBtn").disabled = true;
       waitingForQuestion = false;
       return;
@@ -394,14 +417,8 @@ function checkAnswer(selectedIdx, btnElement) {
     feedbackDiv.innerHTML = "❌ اشتباه! پاسخ صحیح: " + correctAns + "<br>" + currentQuestion.explanation;
     feedbackDiv.style.background = "#fee2e2";
     feedbackDiv.style.color = "#991b1b";
-    
-    // سوال اشتباه پاسخ داده شده دوباره به لیست موجود برمی‌گردد تا بعداً دوباره پرسیده شود
-    // ولی سوال فعلی از لیست حذف شده بود، نیازی به برگرداندن نیست چون کاربر اشتباه کرده باید دوباره تلاش کند
-    // اما سوالی که اشتباه جواب داده شده باید دوباره در چرخه قرار گیرد
-    // به همین دلیل currentQuestion را دوباره به availableQuestions اضافه می‌کنیم
-    if (currentQuestion && !availableQuestions.some(q => q.id === currentQuestion.id)) {
-      availableQuestions.push({ ...currentQuestion });
-    }
+    // در پاسخ اشتباه، سوال از لیست حذف شده و دیگر تکرار نمی‌شود
+    // (همین الان حذف شده، پس دیگر نمی‌آید)
   }
   
   setTimeout(() => {
@@ -422,6 +439,11 @@ function rollDice() {
     document.getElementById("feedback").innerHTML = "🎉 بازی تمام شد! دکمه بازی جدید را بزن."; 
     return; 
   }
+  // اگر سوالی باقی نمانده
+  if (remainingQuestions.length === 0 && playerPos !== 25) {
+    document.getElementById("feedback").innerHTML = "🎉 همه سوالات پاسخ داده شد! برای ادامه بازی جدید را شروع کن.";
+    return;
+  }
   diceValue = Math.floor(Math.random() * 6) + 1;
   document.getElementById("diceResult").innerHTML = "🎲 " + diceValue;
   showQuestion();
@@ -431,9 +453,7 @@ function restartGame() {
   playerPos = 1;
   waitingForQuestion = false;
   answered = false;
-  // بازنشانی لیست سوالات
-  availableQuestions = MASTER_QUESTIONS.map(q => ({ ...q }));
-  usedQuestionIds = [];
+  initializeRemainingQuestions();  // بازنشانی لیست سوالات (همه سوالات دوباره قابل پرسش می‌شوند)
   
   document.getElementById("playerPos").innerText = "1";
   document.getElementById("diceResult").innerHTML = "";
@@ -444,6 +464,8 @@ function restartGame() {
   renderBoard();
 }
 
+// راه‌اندازی اولیه
+initializeRemainingQuestions();
 document.getElementById("diceBtn").onclick = rollDice;
 document.getElementById("restartBtn").onclick = restartGame;
 renderBoard();
